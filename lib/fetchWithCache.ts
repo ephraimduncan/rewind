@@ -1,7 +1,5 @@
 // https://stackoverflow.com/a/62005551
-
 import cacheData from "memory-cache";
-import { cache } from "react";
 import { TwitterUser } from "../types/twitter";
 
 export default async function fetchWithCache(

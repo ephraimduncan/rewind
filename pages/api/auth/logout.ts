@@ -1,4 +1,4 @@
-import cookie from "cookies-next";
+import * as cookie from "cookies-next";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
