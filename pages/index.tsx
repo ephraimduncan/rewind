@@ -6,7 +6,7 @@ export default function Home() {
     <div>
       <div>Home Page</div>
 
-      <Link href="/">
+      <Link href="/api/auth/login">
         <button>Log In</button>
       </Link>
     </div>
