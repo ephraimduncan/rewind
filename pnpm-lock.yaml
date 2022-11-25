@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@types/jsonwebtoken': ^8.5.9
+  '@types/memory-cache': ^0.2.2
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
@@ -9,6 +10,7 @@ specifiers:
   eslint: 8.28.0
   eslint-config-next: 13.0.5
   jsonwebtoken: ^8.5.1
+  memory-cache: ^0.2.0
   mongodb: ^4.12.1
   next: 13.0.5
   react: 18.2.0
@@ -24,11 +26,15 @@ dependencies:
   eslint: 8.28.0
   eslint-config-next: 13.0.5_hsf322ms6xhhd4b5ne6lb74y4a
   jsonwebtoken: 8.5.1
+  memory-cache: 0.2.0
   mongodb: 4.12.1
   next: 13.0.5_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   typescript: 4.9.3
+
+devDependencies:
+  '@types/memory-cache': 0.2.2
 
 packages:
 
@@ -1067,6 +1073,10 @@ packages:
     dependencies:
       '@types/node': 18.11.9
     dev: false
+
+  /@types/memory-cache/0.2.2:
+    resolution: {integrity: sha512-xNnm6EkmYYhTnLiOHC2bdKgcYY5qjjrq5vl9KXD2nh0em0koZoFS500EL4Q4V/eW+A3P7NC7P7GIYzNOSQp7jQ==}
+    dev: true
 
   /@types/node/16.18.3:
     resolution: {integrity: sha512-jh6m0QUhIRcZpNv7Z/rpN+ZWXOicUUQbSoWks7Htkbb9IjFQj4kzcX/xFCkjstCj5flMsN8FiSvt+q+Tcs4Llg==}
@@ -2349,6 +2359,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+    dev: false
+
+  /memory-cache/0.2.0:
+    resolution: {integrity: sha512-OcjA+jzjOYzKmKS6IQVALHLVz+rNTMPoJvCztFaZxwG14wtAW7VRZjwTQu06vKCYOxh4jVnik7ya0SXTB0W+xA==}
     dev: false
 
   /memory-pager/1.5.0:

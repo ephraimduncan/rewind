@@ -1,7 +1,7 @@
 import React from "react";
 import * as NextRouter from "next/router";
 import Link from "next/link";
-import cookie from "cookies-next";
+import * as cookie from "cookies-next";
 import { TwitterUserProps } from "../types/twitter";
 import { GetServerSideProps } from "next";
 
@@ -10,7 +10,7 @@ export default function Home(user: TwitterUserProps) {
 
   React.useEffect(() => {
     router.replace(router.asPath);
-  }, [router, user.isLoggedIn]);
+  }, [user.isLoggedIn]);
 
   return (
     <div>
