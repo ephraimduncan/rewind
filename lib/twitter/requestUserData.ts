@@ -1,4 +1,4 @@
-import { TwitterUser } from "../types/twitter";
+import { TwitterUser } from "../../types/twitter";
 
 export async function requestUserData(accessToken: string): Promise<TwitterUser | null> {
   try {
