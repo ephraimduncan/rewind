@@ -5,6 +5,6 @@ export interface TwitterUser {
   type: string;
 }
 
-export interface TwitterUserWithError extends TwitterUser {
-  error: any;
+export interface TwitterUserProps extends TwitterUser {
+  isLoggedIn: boolean;
 }

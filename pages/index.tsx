@@ -1,30 +1,46 @@
-import { getCookie } from "cookies-next";
-import { GetServerSideProps } from "next";
-import Link from "next/link";
 import React from "react";
-import { TwitterUser } from "../types/twitter";
+import * as NextRouter from "next/router";
+import Link from "next/link";
+import cookie from "cookies-next";
+import { TwitterUserProps } from "../types/twitter";
+import { GetServerSideProps } from "next";
 
-export default function Home(user: TwitterUser) {
+export default function Home(user: TwitterUserProps) {
+  const router = NextRouter.useRouter();
+
+  React.useEffect(() => {
+    router.replace(router.asPath);
+  }, [router, user.isLoggedIn]);
+
   return (
     <div>
       <p>Hello!</p>
-      {user && <div>{user.username}</div>}
-      {!user && (
+      {user.isLoggedIn && (
         <div>
-          <p>You are not Logged in! Login with:</p>
+          Welcome {user.name}
+          <div>
+            <Link href="/api/auth/logout">
+              <button>Log Out</button>
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {!user.isLoggedIn && (
+        <div>
+          <p>You are not Logged in!</p>
           <Link href="/api/auth/login">
             <button>Log In</button>
           </Link>
         </div>
       )}
-
-      <pre>{JSON.stringify(user, null, 2)}</pre>
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const accessToken = getCookie("oauth2_token", { req, res });
+  const accessToken = cookie.getCookie("oauth2_token", { req, res });
+  if (!accessToken) return { props: { isLoggedIn: false } };
 
   const response = await fetch("http://localhost:3000/api/twitter/user", {
     method: "POST",
@@ -38,6 +54,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const user = await response.json();
 
   return {
-    props: user,
+    props: { ...user, isLoggedIn: true },
   };
 };

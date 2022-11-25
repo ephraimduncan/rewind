@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
-import { NextApiRequest, NextApiResponse } from "next";
-import { JWT_SECRET } from "../../../lib/config";
-import { UserJWTPayload } from "../../../types";
-import { getUser } from "../../../lib/mongodb/user";
-import { requestUserData } from "../../../lib/twitter/requestUserData";
+import * as db from "../../../lib/mongodb/user";
+import * as auth from "../../../lib/twitter/requestUserData";
+import * as config from "../../../lib/config";
+import type { UserJWTPayload } from "../../../types";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -13,25 +13,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const accessToken = req.body.accessToken;
-    const payload = jwt.verify(accessToken as string, JWT_SECRET) as UserJWTPayload;
-
-    const userFromDB = await getUser(payload.id);
-    if (!userFromDB) {
-      throw new Error("Not Authenticated: User From DB");
-    }
-
+    const payload = jwt.verify(accessToken as string, config.JWT_SECRET) as UserJWTPayload;
     if (!payload.accessToken) {
       throw new Error("Not Authenticated: JWT Access Token");
     }
 
-    const userFromAPI = await requestUserData(payload.accessToken);
+    const userFromDB = await db.getUser(payload.id);
+    if (!userFromDB) {
+      throw new Error("Not Authenticated: User From DB");
+    }
 
+    const userFromAPI = await auth.requestUserData(payload.accessToken);
     if (userFromAPI?.id !== userFromDB.id) {
       throw new Error("Not Authenticated: ID Are not the same");
     }
 
     res.json(userFromDB);
   } catch (error) {
+    console.log(error);
+
     res.status(401).json({ error });
   }
 }
