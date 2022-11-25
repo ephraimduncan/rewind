@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { upsertUser } from "../../../lib/mongodb/user";
 import { requestAccessToken } from "../../../lib/twitter/requestAccessToken";
 import { requestUserData } from "../../../lib/twitter/requestUserData";
 
@@ -9,7 +10,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const accessToken = await requestAccessToken(code as string);
     const { access_token } = accessToken;
 
-    const user = await requestUserData(access_token);
+    const userData = await requestUserData(access_token);
+
+    const user = await upsertUser(userData!);
 
     res.status(200).json(user);
     //
