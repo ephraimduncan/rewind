@@ -4,3 +4,7 @@ export interface TwitterUser {
   username: string;
   type: string;
 }
+
+export interface TwitterUserWithError extends TwitterUser {
+  error: any;
+}

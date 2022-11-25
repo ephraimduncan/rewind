@@ -22,9 +22,9 @@ export function addCookieToResponse(
   );
 
   setCookie("oauth2_token", token, {
-    res,
     req,
-    httpOnly: process.env.NODE_ENV === "development",
+    res,
+    httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     expires: new Date(Date.now() + 7200 * 1000),

@@ -20,7 +20,8 @@ body {
   font-size: x-large;
 }
 
-button {
+button,
+p {
   margin-top: 0.5rem;
   font-size: larger;
 }
