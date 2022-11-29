@@ -9,7 +9,8 @@ export function addCookieToResponse(
   req: NextApiRequest,
   res: NextApiResponse,
   user: TwitterUser,
-  accessToken: string
+  accessToken: string,
+  expire: number
 ) {
   const { id, type } = user;
 
@@ -28,6 +29,7 @@ export function addCookieToResponse(
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
-    expires: new Date(Date.now() + 7200 * 1000),
+    maxAge: expire,
+    expires: new Date(Date.now() + expire * 1000),
   });
 }

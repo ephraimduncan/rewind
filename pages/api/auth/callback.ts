@@ -9,7 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const accessToken = await requestAccessToken(code as string);
-    const { access_token, refresh_token } = accessToken;
+
+    const { access_token, refresh_token, expires_in } = accessToken;
 
     const userData = await requestUserData(access_token);
     if (!userData) return res.send("Error");
@@ -17,8 +18,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await upsertUser(userData!);
 
     // Store Tokens In a Database or Something
-    addCookieToResponse("oauth2_access_token", req, res, userData, access_token);
-    addCookieToResponse("oauth2_refresh_token", req, res, userData, refresh_token);
+    addCookieToResponse("oauth2_access_token", req, res, userData, access_token, expires_in);
+    addCookieToResponse("oauth2_refresh_token", req, res, userData, refresh_token, expires_in);
 
     res.redirect("/");
   } catch (error) {
