@@ -9,6 +9,7 @@ specifiers:
   cookies-next: ^2.1.1
   eslint: 8.28.0
   eslint-config-next: 13.0.5
+  jose: ^4.11.1
   jsonwebtoken: ^8.5.1
   memory-cache: ^0.2.0
   mongodb: ^4.12.1
@@ -26,6 +27,7 @@ dependencies:
   cookies-next: 2.1.1
   eslint: 8.28.0
   eslint-config-next: 13.0.5_hsf322ms6xhhd4b5ne6lb74y4a
+  jose: 4.11.1
   jsonwebtoken: 8.5.1
   memory-cache: 0.2.0
   mongodb: 4.12.1
@@ -2233,6 +2235,10 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+    dev: false
+
+  /jose/4.11.1:
+    resolution: {integrity: sha512-YRv4Tk/Wlug8qicwqFNFVEZSdbROCHRAC6qu/i0dyNKr5JQdoa2pIGoS04lLO/jXQX7Z9omoNewYIVIxqZBd9Q==}
     dev: false
 
   /js-sdsl/4.2.0:

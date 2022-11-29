@@ -45,8 +45,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (!accessToken) return { props: { isLoggedIn: false } };
 
   // Fetch User from DB
-  
-
   const response = await fetch("http://localhost:3000/api/twitter/user", {
     method: "POST",
     headers: {

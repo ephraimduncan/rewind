@@ -16,6 +16,7 @@
     "cookies-next": "^2.1.1",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
+    "jose": "^4.11.1",
     "jsonwebtoken": "^8.5.1",
     "memory-cache": "^0.2.0",
     "mongodb": "^4.12.1",
