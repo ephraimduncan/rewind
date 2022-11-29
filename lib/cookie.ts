@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
 import { TwitterUser } from "../types/twitter";
-import { JWT_SECRET } from "./config";
+import { JWT_ACCESS_SECRET, JWT_REFRESH_SECRET } from "./config";
 import { setCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export function addCookieToResponse(
+  tokenType: "oauth2_access_token" | "oauth2_refresh_token",
   req: NextApiRequest,
   res: NextApiResponse,
   user: TwitterUser,
@@ -15,13 +16,13 @@ export function addCookieToResponse(
   const token = jwt.sign(
     {
       id,
-      accessToken,
       type,
+      accessToken,
     },
-    JWT_SECRET
+    tokenType === "oauth2_access_token" ? JWT_ACCESS_SECRET : JWT_REFRESH_SECRET
   );
 
-  setCookie("oauth2_token", token, {
+  setCookie(tokenType, token, {
     req,
     res,
     httpOnly: true,

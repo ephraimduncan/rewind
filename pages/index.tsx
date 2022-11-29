@@ -41,7 +41,7 @@ export default function Home(user: TwitterUserProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const accessToken = cookie.getCookie("oauth2_token", { req, res });
+  const accessToken = cookie.getCookie("oauth2_access_token", { req, res });
   if (!accessToken) return { props: { isLoggedIn: false } };
 
   const response = await fetch("http://localhost:3000/api/twitter/user", {

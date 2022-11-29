@@ -1,22 +1,28 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { addCookieToResponse } from "../../../lib/cookie";
 import { upsertUser } from "../../../lib/mongodb/user";
-import { requestAccessToken } from "../../../lib/twitter/requestAccessToken";
+import { refreshToken as rf } from "../../../lib/twitter/refreshToken";
 import { requestUserData } from "../../../lib/twitter/requestUserData";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const code = req.query.code;
+  if (req.method !== "POST") {
+    res.status(405).send({ message: "Only POST requests allowed" });
+    return;
+  }
+
+  const { refreshToken } = req.body;
 
   try {
-    const accessToken = await requestAccessToken(code as string);
-    const { access_token, refresh_token } = accessToken;
+    const token = await rf(refreshToken as string);
+    const { access_token, refresh_token } = token;
 
     const userData = await requestUserData(access_token);
     if (!userData) return res.send("Error");
 
-    await upsertUser(userData!);
+    // TODO: Confirm whether to remove it or not
+    // By the time a user refreshes, it will already be available in the Database
+    // await upsertUser(userData!);
 
-    // Store Tokens In a Database or Something
     addCookieToResponse("oauth2_access_token", req, res, userData, access_token);
     addCookieToResponse("oauth2_refresh_token", req, res, userData, refresh_token);
 
@@ -27,3 +33,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.json({ error });
   }
 }
+
+// For the input prompt, display an input tag, style it and on submit, sent it via next api routes

@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const accessToken = req.body.accessToken;
-    const payload = jwt.verify(accessToken as string, config.JWT_SECRET) as UserJWTPayload;
+    const payload = jwt.verify(accessToken as string, config.JWT_ACCESS_SECRET) as UserJWTPayload;
     if (!payload.accessToken) {
       throw new Error("Not Authenticated: JWT Access Token");
     }
