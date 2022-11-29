@@ -9,9 +9,7 @@ export function generateAuthURL() {
     response_type: "code",
     code_challenge: "nVfaCSBEgbH8hEV2ZFN47x092wADQcFRR8AcMO1JqHE",
     code_challenge_method: "S256",
-    scope: ["users.read", "tweet.read", "follows.read", "follows.write", "offline.access"].join(
-      " "
-    ),
+    scope: ["users.read", "tweet.read", "offline.access", "bookmark.read"].join(" "),
   };
   const qs = new URLSearchParams(options).toString();
   return `${rootUrl}?${qs}`;

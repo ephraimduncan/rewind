@@ -5,30 +5,21 @@ import * as cookie from "cookies-next";
 import { TwitterUserProps } from "../types/twitter";
 import { GetServerSideProps } from "next";
 
-export default function Home(user: TwitterUserProps) {
+export default function Home(props: { isLoggedIn: boolean; bookmarks: any }) {
   const router = NextRouter.useRouter();
 
   React.useEffect(() => {
     router.replace(router.asPath);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user.isLoggedIn]);
+  }, [props.isLoggedIn]);
 
   return (
     <div>
       <p>Hello!</p>
-      {user.isLoggedIn && (
-        <div>
-          Welcome {user.name}
-          <div>
-            <Link href="/api/auth/logout">
-              <button>Log Out</button>
-            </Link>
-          </div>
-        </div>
-      )}
+      {props.isLoggedIn && <pre>{JSON.stringify(props.bookmarks, null, 2)}</pre>}
 
-      {!user.isLoggedIn && (
+      {!props.isLoggedIn && (
         <div>
           <p>You are not Logged in!</p>
           <Link href="/api/auth/login">
@@ -44,10 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const accessToken = cookie.getCookie("oauth2_access_token", { req, res });
   if (!accessToken) return { props: { isLoggedIn: false } };
 
-  // Fetch User from DB
-  
-
-  const response = await fetch("http://localhost:3000/api/twitter/user", {
+  const response = await fetch("http://localhost:3000/api/twitter/bookmarks", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -56,9 +44,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     body: JSON.stringify({ accessToken }),
   });
 
-  const user = await response.json();
+  const bookmarks = await response.json();
 
   return {
-    props: { ...user, isLoggedIn: true },
+    props: { bookmarks, isLoggedIn: true },
   };
 };
