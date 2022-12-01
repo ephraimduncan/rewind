@@ -8,7 +8,7 @@ import { useUser } from "../context/UserProvider";
 
 export default function Home(prop: TwitterUserProps) {
   const router = NextRouter.useRouter();
-  const { user, fetchUser } = useUser();
+  const { user, fetchUser, removeUser } = useUser();
 
   React.useEffect(() => {
     if (prop.accessToken) {
@@ -34,7 +34,7 @@ export default function Home(prop: TwitterUserProps) {
           </div>
           <div>
             <Link href="/api/auth/logout">
-              <button>Log Out</button>
+              <button onClick={removeUser}>Log Out</button>
             </Link>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { TwitterUser } from "../types/twitter";
 interface UserContextType {
   user?: TwitterUser;
   fetchUser: (accessToken: string) => void;
+  removeUser?: () => void;
 }
 
 export const UserContext = React.createContext<UserContextType>({
@@ -36,7 +37,13 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     setUser(response as any); // Remove any type
   };
 
-  return <UserContext.Provider value={{ user, fetchUser }}>{children}</UserContext.Provider>;
+  const removeUser = () => {
+    localStorage.removeItem("current_user");
+  };
+
+  return (
+    <UserContext.Provider value={{ user, fetchUser, removeUser }}>{children}</UserContext.Provider>
+  );
 };
 
 export const useUser = () => React.useContext(UserContext);
