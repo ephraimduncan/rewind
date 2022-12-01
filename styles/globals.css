@@ -2,30 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@font-face {
+  font-family: "FT Polar";
+  src: url("https://uploads-ssl.webflow.com/60ec14d48c97af8448ff08ee/60ec14d48c97af84d6ff094c_FTPolar-Semibold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
+@font-face {
+  font-family: "FT Polar";
+  src: url("https://uploads-ssl.webflow.com/60ec14d48c97af8448ff08ee/60ec14d48c97af59d6ff0931_FTPolar-Medium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
-
+@font-face {
+  font-family: "FT Polar";
+  src: url("https://uploads-ssl.webflow.com/60ec14d48c97af8448ff08ee/60ec14d48c97aff495ff092b_FTPolar-Book.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Moranga;
+  src: url("https://uploads-ssl.webflow.com/60ec14d48c97af8448ff08ee/60f55bb3a6a166e0d5a0e86b_Moranga-Medium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Moranga;
+  src: url("https://uploads-ssl.webflow.com/60ec14d48c97af8448ff08ee/62260ee18602f15354ef82f1_Moranga-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 * {
   box-sizing: border-box;
 }
 
 body {
-  margin: 1rem;
-  font-size: x-large;
+  margin: 0px;
+  min-height: 100%;
+  background-color: rgb(255, 255, 255);
+  color: rgb(24, 24, 27);
+  font-size: 16px;
+  line-height: 24px;
 }
 
-button,
-p {
-  margin-top: 0.5rem;
-  font-size: larger;
+.body {
+  display: block;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+}
+
+html {
+  font-family: sans-serif;
+  text-size-adjust: 100%;
+  height: 100%;
+}
+
+.use-case.lavendar {
+  /* background-color: rgb(238, 235, 255); */
+  font-family: Moranga, sans-serif;
+  font-size: 24px;
+  line-height: 56px;
+  white-space: nowrap;
 }

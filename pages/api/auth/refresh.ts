@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const token = await rf(refreshToken as string);
-    const { access_token, refresh_token } = token;
+    const { access_token, refresh_token, expires_in } = token;
 
     const userData = await requestUserData(access_token);
     if (!userData) return res.send("Error");
@@ -22,9 +22,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // TODO: Confirm whether to remove it or not
     // By the time a user refreshes, it will already be available in the Database
     // await upsertUser(userData!);
-
-    addCookieToResponse("oauth2_access_token", req, res, userData, access_token);
-    addCookieToResponse("oauth2_refresh_token", req, res, userData, refresh_token);
+    addCookieToResponse("oauth2_access_token", req, res, userData, access_token, expires_in);
+    addCookieToResponse("oauth2_refresh_token", req, res, userData, refresh_token, expires_in);
 
     res.redirect("/");
   } catch (error) {
