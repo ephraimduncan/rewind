@@ -1,32 +1,16 @@
 import React from "react";
-import * as NextRouter from "next/router";
-import Link from "next/link";
 import * as cookie from "cookies-next";
-import { TwitterUserProps } from "../types/twitter";
 import { GetServerSideProps } from "next";
+import { useUser } from "../context/UserProvider";
 
 export default function Home(props: { bookmarks: any }) {
-  // const router = NextRouter.useRouter();
-
-  // React.useEffect(() => {
-  //   router.replace(router.asPath);
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [props.isLoggedIn]);
+  const { user } = useUser();
 
   return (
     <div>
-      <p>Hello!</p>
+      <p>Hello! {user?.name} </p>
+      <p>These are your bookmarks </p>
       <pre>{JSON.stringify(props.bookmarks, null, 2)}</pre>
-
-      {/* {!props.isLoggedIn && (
-        <div>
-          <p>You are not Logged in!</p>
-          <Link href="/api/auth/login">
-            <button>Log In</button>
-          </Link>
-        </div>
-      )} */}
     </div>
   );
 }

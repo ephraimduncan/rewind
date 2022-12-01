@@ -4,22 +4,34 @@ import Link from "next/link";
 import * as cookie from "cookies-next";
 import { TwitterUserProps } from "../types/twitter";
 import { GetServerSideProps } from "next";
+import { useUser } from "../context/UserProvider";
 
-export default function Home(user: TwitterUserProps) {
+export default function Home(prop: TwitterUserProps) {
   const router = NextRouter.useRouter();
+  const { user, fetchUser } = useUser();
+
+  React.useEffect(() => {
+    if (prop.accessToken) {
+      fetchUser(prop.accessToken);
+    }
+  }, [prop.accessToken]);
 
   React.useEffect(() => {
     router.replace(router.asPath);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user.isLoggedIn]);
+  }, [prop.isLoggedIn]);
 
   return (
     <div>
       <p>Hello!</p>
-      {user.isLoggedIn && (
+      {prop.isLoggedIn && user && (
         <div>
           Welcome {user.name}
+          <div>
+            <Link href="/bookmark">
+              <button>Go to your Bookmarks</button>
+            </Link>
+          </div>
           <div>
             <Link href="/api/auth/logout">
               <button>Log Out</button>
@@ -28,7 +40,7 @@ export default function Home(user: TwitterUserProps) {
         </div>
       )}
 
-      {!user.isLoggedIn && (
+      {!prop.isLoggedIn && (
         <div>
           <p>You are not Logged in!</p>
           <Link href="/api/auth/login">
@@ -44,19 +56,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const accessToken = cookie.getCookie("oauth2_access_token", { req, res });
   if (!accessToken) return { props: { isLoggedIn: false } };
 
-  // Fetch User from DB
-  const response = await fetch("http://localhost:3000/api/twitter/user", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ accessToken }),
-  });
-
-  const user = await response.json();
-
   return {
-    props: { ...user, isLoggedIn: true },
+    props: { accessToken, isLoggedIn: true },
   };
 };
