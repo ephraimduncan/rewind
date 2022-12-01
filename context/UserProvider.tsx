@@ -13,6 +13,14 @@ export const UserContext = React.createContext<UserContextType>({
 export const SessionProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = React.useState({ id: "", name: "", username: "", type: "twitter" });
 
+  React.useEffect(() => {
+    const lsUser = JSON.parse(localStorage.getItem("current_user")!);
+
+    if (lsUser) {
+      setUser(lsUser);
+    }
+  }, []);
+
   const fetchUser = async (accessToken: string) => {
     let response = await fetch("http://localhost:3000/api/twitter/user", {
       method: "POST",
@@ -24,6 +32,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     });
 
     response = await response.json();
+    localStorage.setItem("current_user", JSON.stringify(response));
     setUser(response as any); // Remove any type
   };
 
