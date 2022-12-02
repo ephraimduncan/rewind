@@ -1,14 +1,17 @@
 import React from "react";
-import * as NextRouter from "next/router";
-import Link from "next/link";
-import * as cookie from "cookies-next";
-import { TwitterUserProps } from "../types/twitter";
+import Features from "../components/Features";
+import CallToAction from "../components/CallToAction";
+import Hero from "../components/Hero";
+import Layout from "../components/Layout";
 import { GetServerSideProps } from "next";
+import * as cookie from "cookies-next";
 import { useUser } from "../context/UserProvider";
+import * as NextRouter from "next/router";
+import { TwitterUserProps } from "../types/twitter";
 
-export default function Home(prop: TwitterUserProps) {
+export default function Dashboard(prop: TwitterUserProps) {
   const router = NextRouter.useRouter();
-  const { user, fetchUser, removeUser } = useUser();
+  const { fetchUser } = useUser();
 
   React.useEffect(() => {
     if (prop.accessToken) {
@@ -22,32 +25,12 @@ export default function Home(prop: TwitterUserProps) {
   }, [prop.isLoggedIn]);
 
   return (
-    <div>
-      <p>Hello!</p>
-      {prop.isLoggedIn && user && (
-        <div>
-          Welcome {user.name}
-          <div>
-            <Link href="/bookmark">
-              <button>Go to your Bookmarks</button>
-            </Link>
-          </div>
-          <div>
-            <Link href="/api/auth/logout">
-              <button onClick={removeUser}>Log Out</button>
-            </Link>
-          </div>
-        </div>
-      )}
-
-      {!prop.isLoggedIn && (
-        <div>
-          <p>You are not Logged in!</p>
-          <Link href="/api/auth/login">
-            <button>Log In</button>
-          </Link>
-        </div>
-      )}
+    <div className="overflow-hidden">
+      <Layout>
+        <Hero />
+        <Features />
+        <CallToAction />
+      </Layout>
     </div>
   );
 }
