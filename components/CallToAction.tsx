@@ -3,17 +3,15 @@ import React from "react";
 export default function CallToAction() {
   return (
     <div>
-      <section className="ready-to section container-custom snipcss-wEinl">
-        <div className="row">
+      <section className="ready-to">
+        <div className="row-cta">
           <div className="col-lg-10 mx-auto">
             <h4 className="text-center like-title">Ready to jump in?</h4>
           </div>
-          <div className="col-auto mx-auto position-relative">
-            <div className="large-link mx-auto">
-              <div className="button-base large blue">Get started</div>
-            </div>
+          <div className="col-auto mx-auto">
+            <div className="button-base">Get started</div>
             <svg
-              className="position-absolute noice-1"
+              className="absolute noice-1"
               width="10"
               height="11"
               viewBox="0 0 10 11"
@@ -26,7 +24,7 @@ export default function CallToAction() {
               ></path>
             </svg>
             <svg
-              className="position-absolute noice-2"
+              className="absolute noice-2"
               width="8"
               height="9"
               viewBox="0 0 8 9"
@@ -39,7 +37,7 @@ export default function CallToAction() {
               ></path>
             </svg>
             <svg
-              className="position-absolute noice-3"
+              className="absolute noice-3"
               width="15"
               height="15"
               viewBox="0 0 15 15"
@@ -52,7 +50,7 @@ export default function CallToAction() {
               ></path>
             </svg>
             <svg
-              className="position-absolute noice-4"
+              className="absolute noice-4"
               width="23"
               height="30"
               viewBox="0 0 23 30"
@@ -65,7 +63,7 @@ export default function CallToAction() {
               ></path>
             </svg>
             <svg
-              className="position-absolute noice-5"
+              className="absolute noice-5"
               width="37"
               height="20"
               viewBox="0 0 37 20"
@@ -78,7 +76,7 @@ export default function CallToAction() {
               ></path>
             </svg>
             <svg
-              className="position-absolute noice-6"
+              className="absolute noice-6"
               width="14"
               height="21"
               viewBox="0 0 14 21"
@@ -91,7 +89,7 @@ export default function CallToAction() {
               ></path>
             </svg>
             <svg
-              className="position-absolute noice-7"
+              className="absolute noice-7"
               width="27"
               height="40"
               viewBox="0 0 27 40"

@@ -9,13 +9,12 @@ export default function FeaturesSection() {
           font-size: 24px;
           line-height: 36px;
           font-weight: 500;
-          text-align: left;
         }
       `}</style>
       <div className="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
         <div className="relative">
           <h4 className="text-center like-title">A better way remind yourself of your bookmarks</h4>
-          <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
+          <p className="description mx-auto mt-4 max-w-3xl text-center">
             Refine your Twitter Bookmarks experience.
           </p>
         </div>

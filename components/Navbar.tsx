@@ -17,13 +17,13 @@ export default function Navbar() {
             <div className="flex justify-between h-16">
               <div className="flex px-2 lg:px-0">
                 {/* TODO: Route to /dashboard if logged In else / */}
-                <Link href="/dashboard">
+                <Link href="/dashboard" className="flex">
                   <div className="flex-shrink-0 flex items-center cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="#4f46e5"
-                      className="w-6 h-6"
+                      className="w-8 h-8"
                     >
                       <path
                         fillRule="evenodd"
@@ -31,7 +31,7 @@ export default function Navbar() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <div className="m-2  use-case lavendar">rewind</div>
+                    <div className=" justify-center items-center logo">rewind</div>
                   </div>
                 </Link>
                 <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
