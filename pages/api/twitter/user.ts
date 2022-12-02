@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const userFromAPI = await auth.requestUserData(payload.accessToken);
-    if (userFromAPI?.id !== userFromDB.id) {
+    if (userFromAPI.data?.id !== userFromDB.id) {
       throw new Error("Not Authenticated: ID Are not the same");
     }
 

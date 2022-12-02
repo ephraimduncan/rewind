@@ -4,8 +4,9 @@ import { GetServerSideProps } from "next";
 import { useUser } from "../context/UserProvider";
 
 import Layout from "../components/Layout";
+import { TwitterUser } from "../types/twitter";
 
-export default function BookmarkPage(props: { bookmarks: any }) {
+export default function BookmarkPage(props: { bookmarks: TwitterUser }) {
   const { user } = useUser();
 
   return (
