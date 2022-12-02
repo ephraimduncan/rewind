@@ -3,15 +3,19 @@ import * as cookie from "cookies-next";
 import { GetServerSideProps } from "next";
 import { useUser } from "../context/UserProvider";
 
-export default function Home(props: { bookmarks: any }) {
+import Layout from "../components/Layout";
+
+export default function BookmarkPage(props: { bookmarks: any }) {
   const { user } = useUser();
 
   return (
-    <div>
-      <p>Hello! {user?.name} </p>
-      <p>These are your bookmarks </p>
-      <pre>{JSON.stringify(props.bookmarks, null, 2)}</pre>
-    </div>
+    <Layout>
+      <div>
+        <p>Hello! {user?.name} </p>
+        <p>These are your bookmarks </p>
+        <pre>{JSON.stringify(props.bookmarks, null, 2)}</pre>
+      </div>
+    </Layout>
   );
 }
 

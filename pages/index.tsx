@@ -9,7 +9,7 @@ import { useUser } from "../context/UserProvider";
 import * as NextRouter from "next/router";
 import { TwitterUserProps } from "../types/twitter";
 
-export default function Dashboard(prop: TwitterUserProps) {
+export default function Home(prop: TwitterUserProps) {
   const router = NextRouter.useRouter();
   const { fetchUser } = useUser();
 

@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useUser } from "../context/UserProvider";
 import TwitterIcon from "./TwitterIcon";
+import { useRouter } from "next/router";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -12,8 +13,11 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
   const { user, removeUser } = useUser();
-
   const isLoggedIn = Boolean(user);
+
+  const router = useRouter();
+
+  const isActive = (route: string) => router.pathname === route;
 
   return (
     <Disclosure as="nav" className="bg-white py-4">
@@ -22,7 +26,7 @@ export default function Navbar() {
           <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex px-2 lg:px-0">
-                <Link href={isLoggedIn ? "/dashboard" : "/"} className="flex">
+                <Link href="/" className="flex">
                   <div className="flex-shrink-0 flex items-center cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -42,24 +46,36 @@ export default function Navbar() {
                 {isLoggedIn && (
                   <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
                     {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                    <a
-                      href="#"
-                      className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                    <Link
+                      href="/dashboard"
+                      className={` ${
+                        isActive("/dashboard")
+                          ? "border-indigo-500 text-gray-900"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                     >
                       Dashboard
-                    </a>
-                    <a
-                      href="#"
-                      className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                    </Link>
+                    <Link
+                      href="/shared"
+                      className={` ${
+                        isActive("/shared")
+                          ? "border-indigo-500 text-gray-900"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                     >
                       Shared
-                    </a>
-                    <a
-                      href="#"
-                      className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                    </Link>
+                    <Link
+                      href="/bookmark"
+                      className={` ${
+                        isActive("/bookmark")
+                          ? "border-indigo-500 text-gray-900"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                     >
                       Bookmark
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
@@ -174,22 +190,34 @@ export default function Navbar() {
                 {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
                 <Disclosure.Button
                   as="a"
-                  href="#"
-                  className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                  href="/dashboard"
+                  className={`${
+                    isActive("/dashboard")
+                      ? "bg-indigo-50 border-indigo-500 text-indigo-700"
+                      : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
+                  } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
                 >
                   Dashboard
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
-                  href="#"
-                  className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                  href="/shared"
+                  className={`${
+                    isActive("/shared")
+                      ? "bg-indigo-50 border-indigo-500 text-indigo-700"
+                      : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
+                  } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
                 >
                   Shared
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
-                  href="#"
-                  className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                  href="/bookmark"
+                  className={`${
+                    isActive("/bookmark")
+                      ? "bg-indigo-50 border-indigo-500 text-indigo-700"
+                      : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
+                  } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
                 >
                   Bookmark
                 </Disclosure.Button>
@@ -216,13 +244,6 @@ export default function Navbar() {
                     className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
                   >
                     Your Profile
-                  </Disclosure.Button>
-                  <Disclosure.Button
-                    as="a"
-                    href="#"
-                    className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
-                  >
-                    Settings
                   </Disclosure.Button>
                   <Disclosure.Button
                     as="a"

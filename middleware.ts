@@ -7,7 +7,7 @@ import { jwtVerify } from "jose";
 class AuthError extends Error {}
 
 export const config = {
-  matcher: ["/bookmark"],
+  matcher: ["/bookmark", "/dashboard", "/shared"],
 };
 
 async function verifyAuth(req: NextRequest) {
