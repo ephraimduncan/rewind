@@ -11,7 +11,7 @@ import { TwitterUserProps } from "../types/twitter";
 
 export default function Home(prop: TwitterUserProps) {
   const router = NextRouter.useRouter();
-  const { fetchUser } = useUser();
+  const { user, fetchUser } = useUser();
 
   React.useEffect(() => {
     if (prop.accessToken) {
@@ -22,7 +22,7 @@ export default function Home(prop: TwitterUserProps) {
   React.useEffect(() => {
     router.replace(router.asPath);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prop.isLoggedIn]);
+  }, [prop.isLoggedIn, user]);
 
   return (
     <div className="overflow-hidden">
