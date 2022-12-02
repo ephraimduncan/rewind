@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Features from "../components/Features";
+import Footer from "../components/Footer";
 
 export default function Dashboard() {
   return (
@@ -89,9 +90,9 @@ export default function Dashboard() {
           }
         `}
       </style>
-      <div>
-        <Navbar />
-      </div>
+
+      <Navbar />
+
       <div className="my-8 container-2 waitlist snipcss-KQ9W2">
         <div className="title-wrap-2">
           <div className="tag">What are you waiting for?</div>
@@ -103,9 +104,9 @@ export default function Dashboard() {
           </h1>
         </div>
       </div>
-      <div>
-        <Features />
-      </div>
+
+      <Features />
+      <Footer />
     </div>
   );
 }
