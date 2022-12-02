@@ -21,6 +21,7 @@ export default function Home(prop: TwitterUserProps) {
 
   React.useEffect(() => {
     router.replace(router.asPath);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prop.isLoggedIn, user]);
 

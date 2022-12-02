@@ -2,19 +2,18 @@ import React from "react";
 import * as cookie from "cookies-next";
 import { GetServerSideProps } from "next";
 import { useUser } from "../context/UserProvider";
-
 import Layout from "../components/Layout";
-import { TwitterUser } from "../types/twitter";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 
-export default function BookmarkPage(props: { bookmarks: TwitterUser }) {
+export default function BookmarkPage(props: { bookmarks: any }) {
   const { user } = useUser();
 
   return (
     <Layout>
       <div>
-        <p>Hello! {user?.name} </p>
-        <p>These are your bookmarks </p>
-        <pre>{JSON.stringify(props.bookmarks, null, 2)}</pre>
+        {props.bookmarks.data.map((bookmark: any) => {
+          return <TwitterTweetEmbed tweetId={bookmark.id} key={bookmark.id} />;
+        })}
       </div>
     </Layout>
   );

@@ -1,3 +1,5 @@
+// https://github.com/vercel/examples/tree/main/solutions/static-tweets-tailwind
+
 import cn from "clsx";
 import { format } from "date-fns";
 import { JSXElementConstructor, Key, ReactElement, ReactFragment, useState } from "react";
