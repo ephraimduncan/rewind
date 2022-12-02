@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Features from "../components/Features";
 
 export default function Dashboard() {
   return (
@@ -12,7 +13,6 @@ export default function Dashboard() {
             display: block;
             max-width: 1268px;
             margin-right: auto;
-            margin-bottom: 0px;
             margin-left: auto;
             grid-auto-columns: 1fr;
             gap: 16px;
@@ -28,7 +28,7 @@ export default function Dashboard() {
           .container-2.waitlist {
             display: flex;
             max-width: 1000px;
-            padding-bottom: 80px;
+            padding-bottom: 60px;
             border-radius: 32px;
             background-color: rgba(99, 102, 241, 0.05);
             background-image: url("https://uploads-ssl.webflow.com/60ec14d48c97af8448ff08ee/616fd3d38cab07742fb4e71e_blog.png");
@@ -48,7 +48,6 @@ export default function Dashboard() {
             max-width: 800px;
             min-width: 800px;
             margin-right: auto;
-            margin-bottom: 32px;
             margin-left: auto;
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;
@@ -93,7 +92,7 @@ export default function Dashboard() {
       <div>
         <Navbar />
       </div>
-      <div className="mt-8 container-2 waitlist snipcss-KQ9W2">
+      <div className="my-8 container-2 waitlist snipcss-KQ9W2">
         <div className="title-wrap-2">
           <div className="tag">What are you waiting for?</div>
           <h1 className="heading invite">
@@ -103,6 +102,9 @@ export default function Dashboard() {
             <br />
           </h1>
         </div>
+      </div>
+      <div>
+        <Features />
       </div>
     </div>
   );
