@@ -88,31 +88,6 @@ svg:not(:root) {
   right: -40px;
 }
 
-.button-base {
-  border: none;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  margin-top: 40px;
-  font-family: "FT Polar", "Arial", sans-serif;
-  display: flex;
-  align-items: center;
-  height: 60px;
-  padding: 0 16px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 22px;
-  text-align: center;
-  letter-spacing: -0.5px;
-  color: #fff;
-  background: #4f46e5;
-  border-radius: 10px;
-}
-
-.button-base:active,
-.button-base:hover {
-  background-color: #5f58e2;
-}
-
 .logo {
   margin-right: 12px;
   margin-left: 4px;

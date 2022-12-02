@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 export default function FeaturesSection() {
   return (
-    <div className="py-16 overflow-hidden">
+    <div className="py-8 overflow-hidden">
       <style jsx>{`
         .description {
           margin-bottom: 24px;

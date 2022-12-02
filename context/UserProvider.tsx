@@ -12,7 +12,7 @@ export const UserContext = React.createContext<UserContextType>({
 });
 
 export const SessionProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = React.useState({ id: "", name: "", username: "", type: "twitter" });
+  const [user, setUser] = React.useState();
 
   React.useEffect(() => {
     const lsUser = JSON.parse(localStorage.getItem("current_user")!);
