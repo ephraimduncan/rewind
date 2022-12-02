@@ -14,18 +14,13 @@ export default function FeaturesSection() {
       `}</style>
       <div className="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
         <div className="relative">
-          <h2
-            style={{ fontFamily: "Moranga" }}
-            className="text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-5xl"
-          >
-            A better way remind yourself of your bookmarks
-          </h2>
+          <h4 className="text-center like-title">A better way remind yourself of your bookmarks</h4>
           <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
             Refine your Twitter Bookmarks experience.
           </p>
         </div>
 
-        <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+        <div className="relative mt-12 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
           <div className="relative">
             <h3
               style={{ fontFamily: "Moranga" }}
@@ -48,7 +43,7 @@ export default function FeaturesSection() {
           </div>
         </div>
 
-        <div className="relative mt-12 sm:mt-16 lg:mt-24">
+        <div className="relative mt-12 sm:mt-16">
           <div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center">
             <div className="lg:col-start-2">
               <h3
@@ -73,7 +68,7 @@ export default function FeaturesSection() {
           </div>
         </div>
 
-        <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+        <div className="relative mt-12 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
           <div className="relative">
             <h3
               style={{ fontFamily: "Moranga" }}
