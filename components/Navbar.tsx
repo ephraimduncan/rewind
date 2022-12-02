@@ -31,7 +31,7 @@ export default function Navbar() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <div className=" justify-center items-center logo">rewind</div>
+                    <div className="logo">rewind</div>
                   </div>
                 </Link>
                 <div className="hidden lg:ml-6 lg:flex lg:space-x-8">

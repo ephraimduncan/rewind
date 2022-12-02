@@ -115,7 +115,7 @@ svg:not(:root) {
 
 .logo {
   margin-right: 12px;
-  margin-left: 12px;
+  margin-left: 4px;
   font-family: Moranga, sans-serif;
   font-size: 24px;
   font-weight: 500;
