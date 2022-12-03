@@ -4,15 +4,22 @@ import { GetServerSideProps } from "next";
 import { useUser } from "../context/UserProvider";
 import Layout from "../components/Layout";
 import { TwitterTweetEmbed } from "react-twitter-embed";
+import TweetSkeleton from "../components/TweetSkeleton";
 
 export default function BookmarkPage(props: { bookmarks: any }) {
-  const { user } = useUser();
-
   return (
     <Layout>
       <div>
-        {props.bookmarks.data.map((bookmark: any) => {
-          return <TwitterTweetEmbed tweetId={bookmark.id} key={bookmark.id} />;
+        {props.bookmarks.data.map((bm: any) => {
+          return (
+            <div key={bm.id} className="my-8">
+              <TwitterTweetEmbed
+                tweetId={bm.id}
+                options={{ align: "center" }}
+                placeholder={<TweetSkeleton />}
+              />
+            </div>
+          );
         })}
       </div>
     </Layout>

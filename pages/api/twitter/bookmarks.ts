@@ -3,13 +3,6 @@ import * as config from "../../../lib/config";
 import type { UserJWTPayload } from "../../../types";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Client } from "twitter-api-sdk";
-import { getUsersIdBookmarks, TwitterParams } from "twitter-api-sdk/dist/types";
-
-const params: TwitterParams<getUsersIdBookmarks> = {
-  expansions: ["author_id"],
-  "user.fields": ["created_at", "id", "name", "profile_image_url", "url", "username", "verified"],
-  "tweet.fields": ["created_at", "public_metrics", "source"],
-};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -28,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const access_token = payload.accessToken;
     const client = new Client(access_token);
 
-    const bookmarks = await client.bookmarks.getUsersIdBookmarks(id, params);
+    const bookmarks = await client.bookmarks.getUsersIdBookmarks(id);
 
     res.send(bookmarks);
   } catch (error) {
