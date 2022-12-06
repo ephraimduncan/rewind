@@ -4,20 +4,30 @@ import * as cookie from "cookies-next";
 import { GetServerSideProps } from "next";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 import TweetSkeleton from "../components/TweetSkeleton";
+import Button from "../components/Button";
+import { useRouter } from "next/router";
 
 export default function Dashboard(props: { bookmark: any }) {
+  const router = useRouter();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+    router.reload();
+  };
+
   return (
     <Layout>
       <div className="py-10">
         <header>
-          <div className="max-w-7xl mx-auto">
-            <h1 className="text-3xl font-bold leading-tight text-gray-900 text-center hover:underline">
+          <div className="max-w-7xl mx-auto grid place-items-center">
+            <h1 className="text-3xl font-bold leading-tight text-slate-900 text-center hover:text-slate-900">
               A Random Bookmark For You
             </h1>
+            <Button fn={refreshData} />
           </div>
         </header>
         <main>
-          <div className="max-w-7xl mx-auto sm:px-6 mt-12">
+          <div className="max-w-7xl mx-auto sm:px-6 mt-8">
             <TwitterTweetEmbed
               tweetId={props.bookmark.id}
               options={{ align: "center" }}
