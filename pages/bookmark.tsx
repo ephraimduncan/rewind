@@ -1,7 +1,6 @@
 import React from "react";
 import * as cookie from "cookies-next";
 import { GetServerSideProps } from "next";
-import { useUser } from "../context/UserProvider";
 import Layout from "../components/Layout";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 import TweetSkeleton from "../components/TweetSkeleton";
