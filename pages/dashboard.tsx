@@ -10,10 +10,11 @@ import { useRouter } from "next/router";
 export default function Dashboard(props: { bookmark: any }) {
   const router = useRouter();
 
-  const refreshData = () => {
+  function refreshData() {
     router.replace(router.asPath);
     router.reload();
-  };
+  }
+
 
   return (
     <Layout>

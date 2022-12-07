@@ -3,7 +3,6 @@ import * as config from "../../../lib/config";
 import type { UserJWTPayload } from "../../../types";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Client } from "twitter-api-sdk";
-import * as cookie from "cookies-next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -12,9 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return;
     }
 
-    const at = cookie.getCookie("oauth2_access_token", { req, res });
+    const { accessToken, paginationToken } = req.body;
 
-    const { accessToken } = req.body;
     const payload = jwt.verify(accessToken as string, config.JWT_ACCESS_SECRET) as UserJWTPayload;
     if (!payload.accessToken) {
       throw new Error("Not Authenticated: JWT Access Token");
@@ -24,7 +22,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const access_token = payload.accessToken;
     const client = new Client(access_token);
 
-    const bookmarks = await client.bookmarks.getUsersIdBookmarks(id);
+    const bookmarks = await client.bookmarks.getUsersIdBookmarks(id, {
+      pagination_token: paginationToken,
+    });
 
     res.send(bookmarks);
   } catch (error) {
