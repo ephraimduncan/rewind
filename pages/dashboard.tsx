@@ -4,7 +4,7 @@ import * as cookie from "cookies-next";
 import { GetServerSideProps } from "next";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 import TweetSkeleton from "../components/TweetSkeleton";
-import Button from "../components/Button";
+import Button from "../components/RefreshButton";
 import { useRouter } from "next/router";
 
 export default function Dashboard(props: { bookmark: any }) {

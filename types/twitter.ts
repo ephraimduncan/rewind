@@ -12,3 +12,9 @@ export interface TwitterUserProps {
   accessToken?: string;
   isLoggedIn: boolean;
 }
+
+export interface Bookmark {
+  text: string;
+  id: string;
+  edit_history_tweet_ids?: string[];
+}

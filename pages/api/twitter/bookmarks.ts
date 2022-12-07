@@ -3,7 +3,6 @@ import * as config from "../../../lib/config";
 import type { UserJWTPayload } from "../../../types";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Client } from "twitter-api-sdk";
-import * as cookie from "cookies-next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -11,8 +10,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(405).send({ message: "Only POST requests allowed" });
       return;
     }
-
-    const at = cookie.getCookie("oauth2_access_token", { req, res });
 
     const { accessToken } = req.body;
     const payload = jwt.verify(accessToken as string, config.JWT_ACCESS_SECRET) as UserJWTPayload;

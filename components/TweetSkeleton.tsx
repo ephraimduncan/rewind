@@ -22,7 +22,7 @@ export default function TweetSkeleton() {
             display: flex;
             flex-direction: column;
             max-width: 500px;
-            min-width: 220px;
+            min-width: 500px;
             margin: 1rem auto;
           }
 
