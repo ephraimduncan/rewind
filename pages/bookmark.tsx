@@ -6,7 +6,6 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 import TweetSkeleton from "../components/TweetSkeleton";
 import Pagination from "../components/Pagination";
 import ShareModal from "../components/SharedModal";
-import { addBookmarkToShared } from "../lib/mongodb/bookmark";
 import { useUser } from "../context/UserProvider";
 import { Bookmark, TwitterUser } from "../types/twitter";
 
