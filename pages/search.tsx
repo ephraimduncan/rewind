@@ -21,13 +21,27 @@ export default function SearchPage(props: { bookmark: any }) {
 
       const results = await response.json();
 
+      setSearchValue("");
       setSearchResult(results);
     }
   }
 
   React.useEffect(() => {
-    console.log(searchResult);
-  }, [searchResult]);
+    fetch("http://localhost:3000/api/mongodb/search", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ searchValue }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setSearchResult(res);
+      })
+      .catch((e) => console.log(e));
+  }, [searchValue]);
 
   return (
     <Layout>
@@ -53,7 +67,14 @@ export default function SearchPage(props: { bookmark: any }) {
           </div>
         </div>
       </div>
-      <div className="max-w-6xl">{searchValue}</div>
+
+      {!searchResult && (
+        <h1 className="text-3xl font-bold leading-tight text-slate-900 text-center hover:text-slate-900">
+          Enter a Search Term
+        </h1>
+      )}
+
+      {searchResult && <pre>{JSON.stringify(searchResult, null, 2)}</pre>}
     </Layout>
   );
 }
