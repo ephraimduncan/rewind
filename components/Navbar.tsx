@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -81,25 +81,12 @@ export default function Navbar() {
               </div>
 
               {isLoggedIn && (
-                <div className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
-                  <div className="max-w-lg w-full lg:max-w-xs">
-                    <label htmlFor="search" className="sr-only">
-                      Search
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                      </div>
-                      <input
-                        id="search"
-                        name="search"
-                        className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        placeholder="Search Shared"
-                        type="search"
-                      />
-                    </div>
-                  </div>
-                </div>
+                <Link
+                  href="/search"
+                  className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end"
+                >
+                  <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                </Link>
               )}
 
               {isLoggedIn && (
@@ -158,7 +145,7 @@ export default function Navbar() {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Your Profile
+                            Go to Twitter
                           </Link>
                         )}
                       </Menu.Item>
@@ -243,7 +230,7 @@ export default function Navbar() {
                     href="#"
                     className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
                   >
-                    Your Profile
+                    Go to Twitter
                   </Disclosure.Button>
                   <Disclosure.Button
                     as="a"
