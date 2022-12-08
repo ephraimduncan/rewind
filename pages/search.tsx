@@ -1,6 +1,10 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 import Layout from "../components/Layout";
+import ShareModal from "../components/SharedModal";
+import TweetSkeleton from "../components/TweetSkeleton";
+import { Bookmark } from "../types/twitter";
 
 export default function SearchPage(props: { bookmark: any }) {
   const [searchValue, setSearchValue] = React.useState("");
@@ -21,26 +25,28 @@ export default function SearchPage(props: { bookmark: any }) {
 
       const results = await response.json();
 
-      setSearchValue("");
       setSearchResult(results);
+      setSearchValue("");
     }
   }
 
   React.useEffect(() => {
-    fetch("http://localhost:3000/api/mongodb/search", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ searchValue }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setSearchResult(res);
+    if (searchValue !== "") {
+      fetch("http://localhost:3000/api/mongodb/search", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ searchValue }),
       })
-      .catch((e) => console.log(e));
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          setSearchResult(res);
+        })
+        .catch((e) => console.log(e));
+    }
   }, [searchValue]);
 
   return (
@@ -68,13 +74,27 @@ export default function SearchPage(props: { bookmark: any }) {
         </div>
       </div>
 
-      {!searchResult && (
-        <h1 className="text-3xl font-bold leading-tight text-slate-900 text-center hover:text-slate-900">
+      {searchResult && searchResult.length < 1 && (
+        <h1 className="text-3xl my-8 font-bold leading-tight text-slate-900 text-center hover:text-slate-900">
           Enter a Search Term
         </h1>
       )}
 
-      {searchResult && <pre>{JSON.stringify(searchResult, null, 2)}</pre>}
+      {searchResult && searchResult.length > 0 && (
+        <div>
+          {searchResult.map((bm: Bookmark) => {
+            return (
+              <div key={bm.id} className="my-8 flex flex-col max-w-fit mx-auto">
+                <TwitterTweetEmbed
+                  tweetId={bm.id}
+                  options={{ align: "center" }}
+                  placeholder={<TweetSkeleton />}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </Layout>
   );
 }
