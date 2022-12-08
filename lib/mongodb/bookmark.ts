@@ -17,7 +17,7 @@ export async function addBookmarkToShared(bookmark: Bookmark, user: TwitterUser)
     {
       $set: {
         id: bookmark.id,
-        text: bookmark.text,
+        bookmarkText: bookmark.text,
         user: user,
       },
     },

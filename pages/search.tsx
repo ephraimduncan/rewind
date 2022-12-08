@@ -4,6 +4,30 @@ import Layout from "../components/Layout";
 
 export default function SearchPage(props: { bookmark: any }) {
   const [searchValue, setSearchValue] = React.useState("");
+  const [searchResult, setSearchResult] = React.useState<any>();
+
+  async function submit(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter" || event.code === "13") {
+      event.preventDefault();
+
+      const response = await fetch("http://localhost:3000/api/mongodb/search", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ searchValue }),
+      });
+
+      const results = await response.json();
+
+      setSearchResult(results);
+    }
+  }
+
+  React.useEffect(() => {
+    console.log(searchResult);
+  }, [searchResult]);
 
   return (
     <Layout>
@@ -24,6 +48,7 @@ export default function SearchPage(props: { bookmark: any }) {
               type="search"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown={submit}
             />
           </div>
         </div>
