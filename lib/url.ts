@@ -9,7 +9,7 @@ export function serverUrl() {
 }
 
 export function clientUrl() {
-  if (VERCEL_URL) {
+  if (NEXT_PUBLIC_VERCEL_URL) {
     return "https://rewind-zeta.vercel.app";
   }
 
