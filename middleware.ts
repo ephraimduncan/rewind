@@ -12,7 +12,6 @@ export const config = {
 
 async function verifyAuth(req: NextRequest) {
   const token = req.cookies.get("oauth2_access_token")?.value;
-
   if (!token) throw new AuthError("Missing user token");
 
   try {
@@ -29,11 +28,10 @@ export async function middleware(req: NextRequest) {
     console.error(err.message);
   });
 
+  // If user is not logged in
   if (!verifiedToken) {
     if (req.nextUrl.pathname.startsWith("/api/")) {
-      return new NextResponse(JSON.stringify({ error: { message: "authentication required" } }), {
-        status: 401,
-      });
+      return NextResponse.redirect(new URL("/api/auth/login", req.url));
     } else {
       return NextResponse.redirect(new URL("/api/auth/login", req.url));
     }

@@ -8,7 +8,7 @@ export function addCookieToResponse(
   tokenType: "oauth2_access_token" | "oauth2_refresh_token",
   req: NextApiRequest,
   res: NextApiResponse,
-  user: TwitterUser,
+  user: any,
   accessToken: string,
   expire: number
 ) {
