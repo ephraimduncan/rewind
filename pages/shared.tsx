@@ -6,10 +6,11 @@ import TweetSkeleton from "../components/TweetSkeleton";
 import { Bookmark } from "../types/twitter";
 import BookmarkModal from "../components/BookmarkModal";
 import * as cookie from "cookies-next";
+import * as url from "../lib/url";
 
 export default function SharedPage({ bookmark, accessToken }: any) {
   function addToTwitterBookmarks(bookmark: Bookmark) {
-    fetch("http://localhost:3000/api/twitter/createBookmark", {
+    fetch(`${url.clientUrl()}/api/twitter/createBookmark`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -52,7 +53,7 @@ export default function SharedPage({ bookmark, accessToken }: any) {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const accessToken = cookie.getCookie("oauth2_access_token", { req, res });
-  const response = await fetch("http://localhost:3000/api/mongodb/shared");
+  const response = await fetch(`${url.serverUrl()}/api/mongodb/shared`);
 
   const bookmark = await response.json();
 

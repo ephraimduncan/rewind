@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import ShareModal from "../components/SharedModal";
 import TweetSkeleton from "../components/TweetSkeleton";
 import { Bookmark } from "../types/twitter";
+import * as url from "../lib/url";
 
 export default function SearchPage(props: { bookmark: any }) {
   const [searchValue, setSearchValue] = React.useState("");
@@ -14,7 +15,7 @@ export default function SearchPage(props: { bookmark: any }) {
     if (event.key === "Enter" || event.code === "13") {
       event.preventDefault();
 
-      const response = await fetch("http://localhost:3000/api/mongodb/search", {
+      const response = await fetch(`${url.clientUrl()}/api/mongodb/search`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -32,7 +33,7 @@ export default function SearchPage(props: { bookmark: any }) {
 
   React.useEffect(() => {
     if (searchValue !== "") {
-      fetch("http://localhost:3000/api/mongodb/search", {
+      fetch(`${url.clientUrl()}/api/mongodb/search`, {
         method: "POST",
         headers: {
           Accept: "application/json",

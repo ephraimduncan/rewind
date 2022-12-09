@@ -1,4 +1,5 @@
 import { CLIENT_ID, CLIENT_SECRET } from "../config";
+import * as url from "../url";
 
 const BasicAuthToken = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`, "utf8").toString("base64");
 
@@ -14,7 +15,7 @@ export async function requestAccessToken(code: string) {
         code,
         client_id: CLIENT_ID,
         grant_type: "authorization_code",
-        redirect_uri: "http://localhost:3000/api/auth/callback",
+        redirect_uri: `${url.serverUrl()}/api/auth/callback`,
         code_verifier: "a79573be9c1291549f7d013d28165a5a8903d2cf796e510ad062c64a",
       }),
     });

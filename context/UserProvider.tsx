@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { TwitterUser } from "../types/twitter";
+import * as url from "../lib/url";
 
 interface UserContextType {
   user?: TwitterUser;
@@ -23,7 +24,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const fetchUser = async (accessToken: string) => {
-    let response = await fetch("http://localhost:3000/api/twitter/user", {
+    let response = await fetch(`${url.clientUrl()}/api/twitter/user`, {
       method: "POST",
       headers: {
         Accept: "application/json",

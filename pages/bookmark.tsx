@@ -8,6 +8,7 @@ import Pagination from "../components/Pagination";
 import ShareModal from "../components/SharedModal";
 import { useUser } from "../context/UserProvider";
 import { Bookmark, TwitterUser } from "../types/twitter";
+import * as url from "../lib/url";
 
 export default function BookmarkPage(props: { bookmarks: any; accessToken: string }) {
   const [bookmarks, setBookmarks] = React.useState(props.bookmarks);
@@ -16,7 +17,7 @@ export default function BookmarkPage(props: { bookmarks: any; accessToken: strin
 
   function fetchBookmark(token: string) {
     setLoading(true);
-    fetch("http://localhost:3000/api/twitter/paginateBookmark", {
+    fetch(`${url.clientUrl()}/api/twitter/paginateBookmark`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -36,7 +37,7 @@ export default function BookmarkPage(props: { bookmarks: any; accessToken: strin
   }
 
   function shareBookmark(bookmark: Bookmark, user: TwitterUser) {
-    fetch("http://localhost:3000/api/mongodb/add-shared", {
+    fetch(`${url.clientUrl()}/api/mongodb/add-shared`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -94,7 +95,7 @@ export default function BookmarkPage(props: { bookmarks: any; accessToken: strin
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const accessToken = cookie.getCookie("oauth2_access_token", { req, res });
 
-  const response = await fetch("http://localhost:3000/api/twitter/bookmarks", {
+  const response = await fetch(`${url.serverUrl()}/api/twitter/bookmarks`, {
     method: "POST",
     headers: {
       Accept: "application/json",

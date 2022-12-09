@@ -6,6 +6,7 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 import TweetSkeleton from "../components/TweetSkeleton";
 import Button from "../components/RefreshButton";
 import { useRouter } from "next/router";
+import * as url from "../lib/url";
 
 export default function Dashboard(props: { bookmark: any }) {
   const router = useRouter();
@@ -14,7 +15,6 @@ export default function Dashboard(props: { bookmark: any }) {
     router.replace(router.asPath);
     router.reload();
   }
-
 
   return (
     <Layout>
@@ -44,7 +44,7 @@ export default function Dashboard(props: { bookmark: any }) {
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const accessToken = cookie.getCookie("oauth2_access_token", { req, res });
 
-  const response = await fetch("http://localhost:3000/api/twitter/bookmarks", {
+  const response = await fetch(`${url.serverUrl()}/api/twitter/bookmarks`, {
     method: "POST",
     headers: {
       Accept: "application/json",
